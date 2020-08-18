@@ -1,10 +1,42 @@
-# Sidebar Preview Button DatoCMS plugin
+# Sidebar Link Buttons DatoCMS plugin
 
 A plugin for automatically generating buttons in the sidebar for previews and published content.
 
 ## Configuration
 
-[Describe/screenshot any global/instance parameters this plugin requires]
+There is one global property, named "global". It is a JSON object representing the key/value pairs that will be made available for substitution when rendering the sidebar buttons.
+
+Example:
+```
+{
+  "GLOBAL_PREVIEW_TEXT": "Preview",
+  "GLOBAL_LIVE_TEXT": "Live",
+  "GLOBAL_PREVIEW_BASE_URL": "https://your-domain/api/preview",
+  "GLOBAL_PREVIEW_SECRET": "your-secret",
+  "GLOBAL_LIVE_BASE_URL": "https://your-domain"
+}
+```
+
+There is one instance property, named "buttons". It is a JSON array representing the buttons which will be rendered in the sidebar. The keys are "text" and "link".
+
+Example:
+```
+[
+  {
+    "text": "${GLOBAL_PREVIEW_TEXT}",
+    "link": "${GLOBAL_PREVIEW_BASE_URL}?secret=${GLOBAL_PREVIEW_SECRET}&slug=${slug}"
+  },
+  {
+    "text": "${GLOBAL_LIVE_TEXT}",
+    "link": "${GLOBAL_LIVE_BASE_URL}/posts/${slug}"
+  }
+]
+```
+
+## Usage
+Click one of the buttons and the browser will open a new tab, taking you to the configured link. 
+
+![How it looks](https://github.com/nzhenry/datocms-plugin-sidebar-link-buttons/raw/master/docs/cover.png)
 
 ## Development
 

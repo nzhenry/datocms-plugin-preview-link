@@ -1,8 +1,8 @@
 {
-  "name": "datocms-plugin-sidebar-preview-button",
-  "homepage": "https://github.com/nzhenry/datocms-plugin-sidebar-preview-button",
+  "name": "datocms-plugin-sidebar-link-buttons",
+  "homepage": "https://github.com/nzhenry/datocms-plugin-sidebar-link-buttons",
   "version": "0.0.1",
-  "description": "A plugin for automatically generating buttons in the sidebar for previews and published content.",
+  "description": "A plugin for automatically generating link buttons in the sidebar. Intended for preview links but flexible enough to do other stuff too!",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --port 5000",
@@ -17,18 +17,20 @@
     "datocms-plugin",
     "sidebar",
     "json-field",
-    "sidebar preview"
+    "preview",
+    "link",
+    "button"
   ],
   "files": [
     "dist",
     "docs"
   ],
-  "author": "nzhenry <nzhenry@gmail.com>",
+  "author": "nzhenry",
   "license": "ISC",
   "datoCmsPlugin": {
-    "title": "Sidebar Preview Button",
-    "previewImage": "docs/icon.png",
-    "coverImage": "docs/icon.png",
+    "title": "Sidebar Link Buttons",
+    "previewImage": "docs/cover.png",
+    "coverImage": "docs/cover.png",
     "entryPoint": "dist/index.html",
     "pluginType": "sidebar",
     "fieldTypes": [
@@ -37,70 +39,20 @@
     "parameters": {
       "global": [
         {
-          "id": "developmentMode",
-          "label": "Development mode",
-          "type": "boolean",
-          "required": true,
-          "default": false,
-          "hint": "Shows debug messages in console"
-        },
-        {
-          "id": "showDraftButton",
-          "label": "Show Draft Button",
-          "type": "boolean",
-          "required": true,
-          "default": true,
-          "hint": "Determines whether to show the 'View Draft' button"
-        },
-        {
-          "id": "draftText",
-          "label": "Draft Button Text",
-          "type": "string",
-          "required": true,
-          "default": "View Draft",
-          "hint": "The text shown on the 'View Draft' button"
-        },
-        {
-          "id": "draftBaseUrl",
-          "label": "Draft Base URL",
-          "type": "string",
-          "hint": "The base URL used for the 'View Draft' link"
-        },
-        {
-          "id": "showLiveButton",
-          "label": "Show Live Button",
-          "type": "boolean",
-          "required": true,
-          "default": true,
-          "hint": "Determines whether to show the 'View Live' button"
-        },
-        {
-          "id": "liveText",
-          "label": "Live Button Text",
-          "type": "string",
-          "required": true,
-          "default": "View Live",
-          "hint": "The text shown on the 'View Live' button"
-        },
-        {
-          "id": "liveBaseUrl",
-          "label": "Live Base URL",
-          "type": "string",
-          "hint": "The base URL used for the 'View Live' link"
+          "id": "global",
+          "label": "Global Properties",
+          "type": "json",
+          "default": "{\n  \"GLOBAL_PREVIEW_TEXT\": \"Preview\",\n  \"GLOBAL_LIVE_TEXT\": \"Live\",\n  \"GLOBAL_PREVIEW_BASE_URL\": \"https://your-domain/api/preview\",\n  \"GLOBAL_PREVIEW_SECRET\": \"your-secret\",\n  \"GLOBAL_LIVE_BASE_URL\": \"https://your-domain\"\n}",
+          "hint": "These properties are made available for substitution when generating the sidebar buttons. See the plugin home page for an example."
         }
       ],
       "instance": [
         {
-          "id": "draftRelativeUrl",
-          "label": "Draft Append URL",
-          "type": "string",
-          "hint": "We'll subsitute the params (eg ${id}, ${slug} or others) and then append this to the draft base URL."
-        },
-        {
-          "id": "liveRelativeUrl",
-          "label": "Live Append URL",
-          "type": "string",
-          "hint": "We'll subsitute the params (eg ${id}, ${slug} or others) and then append this to the live base URL."
+          "id": "buttons",
+          "label": "Buttons",
+          "type": "json",
+          "default": "[\n  {\n    \"text\": \"${GLOBAL_PREVIEW_TEXT}\",\n    \"link\": \"${GLOBAL_PREVIEW_BASE_URL}?secret=${GLOBAL_PREVIEW_SECRET}&slug=${slug}\"\n  },\n  {\n    \"text\": \"${GLOBAL_LIVE_TEXT}\",\n    \"link\": \"${GLOBAL_LIVE_BASE_URL}/posts/${slug}\"\n  }\n]",
+          "hint": "A JSON array of buttons to render in the sidebar. See the plugin home page for an example."
         }
       ]
     }
