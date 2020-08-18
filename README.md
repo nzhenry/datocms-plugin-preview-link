@@ -1,6 +1,6 @@
 # Sidebar Link Buttons DatoCMS plugin
 
-A plugin for automatically generating buttons in the sidebar for previews and published content.
+A plugin for automatically generating link buttons in the sidebar. Intended for preview links but flexible enough to do other stuff too!
 
 ## Configuration
 
