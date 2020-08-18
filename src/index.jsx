@@ -9,7 +9,5 @@ window.DatoCmsPlugin.init((plugin) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  console.log('plugin', plugin);
-
   render(<Main plugin={plugin} />, container);
 });
