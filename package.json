@@ -1,0 +1,147 @@
+{
+  "name": "datocms-plugin-sidebar-preview-button",
+  "homepage": "https://github.com/nzhenry/datocms-plugin-sidebar-preview-button",
+  "version": "0.0.1",
+  "description": "A plugin for automatically generating buttons in the sidebar for previews and published content.",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dev-server --port 5000",
+    "dist": "NODE_ENV=production webpack --progress",
+    "addToProject": "yo datocms-plugin:add-to-project",
+    "prepublishOnly": "rimraf lib dist && mkdir dist && npm run dist",
+    "lint": "eslint \"./src/*.{js,jsx}\"",
+    "test": "echo 1"
+  },
+  "keywords": [
+    "datocms",
+    "datocms-plugin",
+    "sidebar",
+    "json-field",
+    "sidebar preview"
+  ],
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "author": "nzhenry <nzhenry@gmail.com>",
+  "license": "ISC",
+  "datoCmsPlugin": {
+    "title": "Sidebar Preview Button",
+    "previewImage": "docs/icon.png",
+    "coverImage": "docs/icon.png",
+    "entryPoint": "dist/index.html",
+    "pluginType": "sidebar",
+    "fieldTypes": [
+      "json"
+    ],
+    "parameters": {
+      "global": [
+        {
+          "id": "developmentMode",
+          "label": "Development mode",
+          "type": "boolean",
+          "required": true,
+          "default": false,
+          "hint": "Shows debug messages in console"
+        },
+        {
+          "id": "showDraftButton",
+          "label": "Show Draft Button",
+          "type": "boolean",
+          "required": true,
+          "default": true,
+          "hint": "Determines whether to show the 'View Draft' button"
+        },
+        {
+          "id": "draftText",
+          "label": "Draft Button Text",
+          "type": "string",
+          "required": true,
+          "default": "View Draft",
+          "hint": "The text shown on the 'View Draft' button"
+        },
+        {
+          "id": "draftBaseUrl",
+          "label": "Draft Base URL",
+          "type": "string",
+          "hint": "The base URL used for the 'View Draft' link"
+        },
+        {
+          "id": "showLiveButton",
+          "label": "Show Live Button",
+          "type": "boolean",
+          "required": true,
+          "default": true,
+          "hint": "Determines whether to show the 'View Live' button"
+        },
+        {
+          "id": "liveText",
+          "label": "Live Button Text",
+          "type": "string",
+          "required": true,
+          "default": "View Live",
+          "hint": "The text shown on the 'View Live' button"
+        },
+        {
+          "id": "liveBaseUrl",
+          "label": "Live Base URL",
+          "type": "string",
+          "hint": "The base URL used for the 'View Live' link"
+        }
+      ],
+      "instance": [
+        {
+          "id": "draftRelativeUrl",
+          "label": "Draft Append URL",
+          "type": "string",
+          "hint": "We'll subsitute the params (eg ${id}, ${slug} or others) and then append this to the draft base URL."
+        },
+        {
+          "id": "liveRelativeUrl",
+          "label": "Live Append URL",
+          "type": "string",
+          "hint": "We'll subsitute the params (eg ${id}, ${slug} or others) and then append this to the live base URL."
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0-beta.54",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^8.0.0-beta",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-webpack": "^0.10.1",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "generator-datocms-plugin": "^1.0.24",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "serve": "^10.0.2",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.10",
+    "yo": "^3.1.1"
+  },
+  "dependencies": {
+    "classname": "^0.0.0",
+    "html-webpack-tags-plugin": "^2.0.17",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  }
+}
