@@ -34,7 +34,7 @@ export default class Main extends Component {
     ));
 
     return (
-      <div className="container">
+      <div>
         {renderedButtons}
       </div>
     );
