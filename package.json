@@ -1,7 +1,7 @@
 {
   "name": "datocms-plugin-sidebar-link-buttons",
   "homepage": "https://github.com/nzhenry/datocms-plugin-sidebar-link-buttons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin for automatically generating link buttons in the sidebar. Intended for preview links but flexible enough to do other stuff too!",
   "main": "index.js",
   "scripts": {
