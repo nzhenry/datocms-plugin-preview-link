@@ -12,14 +12,24 @@ function sub(text, entity) {
 
 export default class Main extends Component {
   render() {
-    const global = JSON.parse(this.props.plugin._settings.parameters.global.global) || {};
-    const buttons = JSON.parse(this.props.plugin._settings.parameters.instance.buttons) || [];
+    const global = JSON.parse(this.props.plugin.parameters.global.global) || {};
+    const buttons = JSON.parse(this.props.plugin.parameters.instance.buttons) || [];
 
     const entity = {
       ...global,
-      id: this.props.plugin._settings.itemId,
-      ...this.props.plugin._settings.itemValue,
+      id: this.props.plugin.itemId,
     };
+
+    Object.keys(this.props.plugin.fields)
+        .forEach((key) => {
+          const field = this.props.plugin.fields[key];
+          if (field.relationships.item_type.data.id === this.props.plugin.itemType.id) {
+            const fieldKey = field.attributes.api_key;
+            const fieldValue = this.props.plugin.getFieldValue(field.attributes.api_key);
+            entity[fieldKey] = fieldValue;
+            console.log(fieldKey, fieldValue);
+          }
+        });
 
     const renderedButtons = buttons.map((btn, i) => (
       <a

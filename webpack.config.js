@@ -29,7 +29,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: { loader: 'babel-loader' } },
       {
-        test: /\.sass$/,
+        test: /\.s[ac]ss$/,
         use: [
           "style-loader",
           "css-loader",
