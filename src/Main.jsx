@@ -27,7 +27,6 @@ export default class Main extends Component {
             const fieldKey = field.attributes.api_key;
             const fieldValue = this.props.plugin.getFieldValue(field.attributes.api_key);
             entity[fieldKey] = fieldValue;
-            console.log(fieldKey, fieldValue);
           }
         });
 
