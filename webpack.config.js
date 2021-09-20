@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-
 module.exports = {
   entry: __dirname + '/src/index.jsx',
   mode: process.env.NODE_ENV,

@@ -1,11 +1,19 @@
+import at from 'lodash.at';
 import React, { Component } from 'react';
 import './style.sass';
 
-function sub(text, entity) {
+function sub(text, entity, locale) {
   let result = text;
+  entity["locale"] = locale;
   Object.keys(entity)
     .forEach((key) => {
-      result = result.replace('${' + key + '}', entity[key]);
+      if(typeof entity[key] === "object"){
+        if(entity[key] && entity[key][locale]){
+          result = result.replace('${' + key + '}', entity[key][locale]);
+        }
+      } else{
+        result = result.replace('${' + key + '}', entity[key]);
+      }
     });
   return result;
 }
@@ -27,20 +35,21 @@ export default class Main extends Component {
             const fieldKey = field.attributes.api_key;
             const fieldValue = this.props.plugin.getFieldValue(field.attributes.api_key);
             entity[fieldKey] = fieldValue;
-            console.log(fieldKey, fieldValue);
           }
         });
 
     const renderedButtons = buttons.map((btn, i) => (
-      <a
-        key={i.toString()}
-        href={sub(btn.link, entity)}
+      this.props.plugin.site.attributes.locales.map((locale) => (
+        <a
+        key={locale + i.toString()}
+        href={`${sub(btn.link, entity, locale)}`}
         className="btn"
         target="_blank"
         rel="noopener noreferrer"
-      >
-        {sub(btn.text, entity)}
+        >
+        {`${locale}: ${sub(btn.text, entity, locale)}`}
       </a>
+        ))
     ));
 
     return (
